@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Ürünler Listesi</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-info">
+
+<div class="container my-3 p-2 bg-white">
+    {{ form_start(form) }}
+    <div class="row m-0 p-2 text-center">
+        <div class="col-12 bg-light">
+            <h2>Yeni Ürün Ekle</h2>
+        </div>
+        <div class="col-3 font-weight-bold">
+            İsim
+        </div>
+        <div class="col-3 font-weight-bold">
+            Açıklaması
+        </div>
+        <div class="col-2 font-weight-bold">
+            Fiyat
+        </div>
+        <div class="col-2 font-weight-bold">
+            Kategori
+        </div>
+        <div class="col-2 font-weight-bold">
+
+        </div>
+
+        <div class="col-3 mt-2">
+            {{ form_widget(form.isim, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-3 mt-2">
+            {{ form_widget(form.urunAciklamasi, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-2 mt-2">
+            {{ form_widget(form.fiyat, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-2 mt-2">
+            {{ form_widget(form.urunKategori, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-2 mt-2">
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'}}) }}
+        </div>
+    </div>
+    <hr>
+    {{ form_end(form) }}
+
+    <div class="row p-2 mt-5 mb-2 m-0">
+        <div class="col-12 text-start my-2 bg-light">
+            <h2>Ürünler Listesi</h2>
+        </div>
+        <div class="col-3 text-center font-weight-bold">
+            İsim
+        </div>
+        <div class="col-3 text-center font-weight-bold">
+            Açıklaması
+        </div>
+        <div class="col-2 text-center font-weight-bold">
+            Fiyat
+        </div>
+        <div class="col-2 text-center font-weight-bold">
+            Kategori
+        </div>
+        <div class="col-2 text-center font-weight-bold">
+
+        </div>
+    </div>
+
+    {% for urun in urunler %}
+        <hr>
+        {{ form_start(editForms[urun.id], {'action': path('urun_duzenle', {'id': urun.id})}) }}
+        <div class="row p-2 m-0 edit-row" data-urun-id="{{ urun.id }}">
+            <div class="col-3 text-center">
+                {{ form_widget(editForms[urun.id].isim, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'isim'}}) }}
+            </div>
+            <div class="col-3 text-center">
+                {{ form_widget(editForms[urun.id].urunAciklamasi, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'urunAciklamasi'}}) }}
+            </div>
+            <div class="col-2 text-center">
+                {{ form_widget(editForms[urun.id].fiyat, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'fiyat'}}) }}
+            </div>
+            <div class="col-2 text-center">
+                {{ form_widget(editForms[urun.id].urunKategori, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'urunKategori'}}) }}
+            </div>
+            <div class="col-1 text-center">
+                <button type="button" class="btn btn-primary btn-sm edit-btn">Düzenle</button>
+                {{ form_widget(editForms[urun.id].save, {'attr': {'class': 'btn btn-success btn-sm save-btn', 'style': 'display: none;'}}) }}
+                {{ form_end(editForms[urun.id]) }}
+            </div>
+            <div class="col-1 text-center">
+                {{ form_start(deleteForms[urun.id]) }}
+                <button class="btn btn-danger">Sil</button>
+                {{ form_end(deleteForms[urun.id]) }}
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+<!-- jQuery ilki, sonra Popper.js, sonra da Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.querySelectorAll('.edit-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Disable all forms
+            document.querySelectorAll('.edit-row').forEach(function(row) {
+                row.querySelectorAll('[data-form-field]').forEach(function(input) {
+                    input.disabled = true;
+                });
+                row.querySelector('.edit-btn').style.display = 'inline'; // Show "Düzenle" button
+                row.querySelector('.save-btn').style.display = 'none'; // Hide "Kaydet" button
+            });
+
+            // Enable current form
+            const formRow = this.closest('.row');
+            formRow.querySelectorAll('[data-form-field]').forEach(function(input) {
+                input.disabled = false;
+            });
+            formRow.querySelector('.edit-btn').style.display = 'none'; // Hide "Düzenle" button
+            formRow.querySelector('.save-btn').style.display = 'inline'; // Show "Kaydet" button
+        });
+    });
+</script>
+
+</body>
+</html>

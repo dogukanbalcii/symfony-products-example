@@ -1,0 +1,5 @@
+.custom-container {
+    max-width: 600px; /* Genişliği ayarlayın */
+    margin: 20px auto; /* Sayfanın ortasında yer almasını sağlar */
+    padding: 20px; /* İçerik ile kenar arasındaki boşluk */
+}
