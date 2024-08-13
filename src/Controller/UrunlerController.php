@@ -10,23 +10,39 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class UrunlerController extends AbstractController
 {
     private UrunlerRepository $urunlerRepository;
     private EntityManagerInterface $entityManager;
+    private PaginatorInterface $paginator;
 
-    public function __construct(UrunlerRepository $urunlerRepository, EntityManagerInterface $entityManager)
+    public function __construct(UrunlerRepository $urunlerRepository, EntityManagerInterface $entityManager, PaginatorInterface $paginator)
     {
         $this->urunlerRepository = $urunlerRepository;
         $this->entityManager = $entityManager;
+        $this->paginator = $paginator;
     }
 
     #[Route('/urunler', name: 'urun_listesi')]
     public function index(Request $request): Response
     {
         // Veritabanından ürünleri çek
-        $urunler = $this->urunlerRepository->findAll();
+        $queryBuilder = $this->urunlerRepository->createQueryBuilder('u')
+            ->orderBy('u.id', 'DESC')
+            ->getQuery();
+
+        // Sayfayı ve limitleri al
+        $page = $request->query->getInt('page', 1);
+        $limit = 5;
+
+        // Paginator'ı kullanarak ürünleri sayfalayın
+        $pagination = $this->paginator->paginate(
+            $queryBuilder, // sorgu
+            $page,         // geçerli sayfa numarası
+            $limit         // sayfa başına ürün sayısı
+        );
 
         // Yeni ürün ekleme formu oluştur
         $urun = new Urunler();
@@ -46,7 +62,7 @@ class UrunlerController extends AbstractController
         // Her ürün için düzenleme ve silme formunu oluştur
         $editForms = [];
         $deleteForms = [];
-        foreach ($urunler as $urun) {
+        foreach ($pagination->getItems() as $urun) {
             $editForms[$urun->getId()] = $this->createForm(UrunType::class, $urun)->createView();
 
             // Silme formunu oluştur
@@ -59,7 +75,7 @@ class UrunlerController extends AbstractController
 
         // Twig şablonunu render et
         return $this->render('urunler/urun_list.html.twig', [
-            'urunler' => $urunler,
+            'urunler' => $pagination,
             'form' => $form->createView(),
             'editForms' => $editForms,
             'deleteForms' => $deleteForms,
@@ -76,6 +92,7 @@ class UrunlerController extends AbstractController
         // Ürün silindikten sonra sayfayı yenile
         return $this->redirectToRoute('urun_listesi');
     }
+
     #[Route('/urun/duzenle/{id}', name: 'urun_duzenle')]
     public function duzenle(Request $request, Urunler $urun): Response
     {
@@ -92,8 +109,4 @@ class UrunlerController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
-
 }
-

@@ -2,5 +2,46 @@
 
 .urunlerFontSize
 {
-    font-size:25px;
+    font-size:18px;
 }
+
+
+a[data-toggle="tooltip"] {
+    color: black;
+}
+
+a[data-toggle="tooltip"]:hover {
+    color: black;
+}
+
+.urunKategoriFontSize
+{
+    font-size:20px;
+}
+
+.urun-link {
+    text-decoration: none;
+    color: #000; /* Bağlantının rengi */
+}
+
+.urun-link:hover {
+    text-decoration: underline;;
+    color: #000; /* Bağlantının rengi */
+}
+
+.pagination {
+    color: black; /* Metin rengi */
+}
+
+.pagination a {
+    color: black; /* Bağlantı rengi */
+}
+
+.pagination a:hover {
+    color: grey; /* Üzerine gelindiğinde renk değişimi */
+}
+
+.pagination .active {
+    color: black; /* Aktif sayfa rengi */
+}
+

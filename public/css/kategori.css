@@ -3,3 +3,19 @@
     margin: 20px auto; /* Sayfanın ortasında yer almasını sağlar */
     padding: 20px; /* İçerik ile kenar arasındaki boşluk */
 }
+
+.pagination {
+    color: black; /* Metin rengi */
+}
+
+.pagination a {
+    color: black; /* Bağlantı rengi */
+}
+
+.pagination a:hover {
+    color: grey; /* Üzerine gelindiğinde renk değişimi */
+}
+
+.pagination .active {
+    color: black; /* Aktif sayfa rengi */
+}

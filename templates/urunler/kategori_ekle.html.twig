@@ -3,24 +3,31 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kategori Ekle</title>
+    <title>Kategoriler</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="{{ asset('js/kategori.js') }}"></script>
-    <link href="{{ asset('css/kategori.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/urunList.css') }}" rel="stylesheet">
 </head>
 
-<body class="bg-info">
-<div class="container bg-white text-center p-2 mt-4 custom-container">
+<body>
+<div class="container bg-light text-center p-2 mt-4 custom-container">
     <div class="row p-2 m-0  justify-content-center">
         <div class="col-12  mb-2">
             <h1>Kategori Ekle</h1>
         </div>
+        <!-- Hata mesajlarını burada gösteriyoruz -->
+        {% for message in app.flashes('error') %}
+            <div class="col-12">
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
         <div class="col-12 col-md-7 col-lg-12 ">
             <form action="{{ path('kategori_ekle') }}" method="post" class="d-flex flex-wrap align-items-center">
                 <div class="flex-grow-1 mr-2">
                     <label for="isim"></label><input type="text" id="isim" name="isim" class="form-control" required>
                 </div>
-                <div>
+                <div class="mt-4">
                     <button type="submit" class="btn btn-success">
                         <img src="{{ asset('icons/create.png') }}" style="height: 30px; width: 30px;" alt="create">
                     </button>
@@ -63,5 +70,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{{ asset('js/kategori.js') }}"></script>
 </body>
 </html>
