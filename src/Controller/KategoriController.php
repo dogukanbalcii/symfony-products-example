@@ -9,12 +9,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class KategoriController extends AbstractController
 {
     #[Route('/urunler/kategori-ekle', name: 'kategori_ekle')]
-    public function kategoriEkle(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
+    public function kategoriEkle(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator,AuthorizationCheckerInterface $authChecker): Response
     {
+        if (!$authChecker->isGranted('ROLE_EDITOR')) {
+            return $this->redirectToRoute('index');
+        }
+
         $page = $request->query->getInt('page', 1);
         $limit = 5;
 
@@ -48,8 +53,12 @@ class KategoriController extends AbstractController
     }
 
     #[Route('/urunler/kategori-sil/{id}', name: 'kategori_sil')]
-    public function kategoriSil(int $id, EntityManagerInterface $entityManager): Response
+    public function kategoriSil(int $id, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $authChecker): Response
     {
+        if (!$authChecker->isGranted('ROLE_EDITOR')) {
+            return $this->redirectToRoute('index');
+        }
+
         $kategoriRepository = $entityManager->getRepository(UrunKategori::class);
         $kategori = $kategoriRepository->find($id);
 
@@ -73,8 +82,11 @@ class KategoriController extends AbstractController
     }
 
     #[Route('/urunler/kategori-duzenle/{id}', name: 'kategori_duzenle', methods: ['POST', 'PUT'])]
-    public function kategoriDuzenle(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    public function kategoriDuzenle(int $id, Request $request, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $authChecker): Response
     {
+        if (!$authChecker->isGranted('ROLE_EDITOR')) {
+            return $this->redirectToRoute('index');
+        }
         $kategoriRepository = $entityManager->getRepository(UrunKategori::class);
         $kategori = $kategoriRepository->find($id);
 

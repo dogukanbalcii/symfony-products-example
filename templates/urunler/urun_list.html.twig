@@ -7,12 +7,12 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/urunList.css') }}" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container my-3 p-2 bg-white">
+<div class="container my-3 p-2 bg-white shadow-lg rounded border">
     {{ form_start(form) }}
     <div class="row m-0 p-2 text-center">
-        <div class="col-12 bg-light">
+        <div class="col-12 ">
             <h2>Yeni Ürün Ekle</h2>
         </div>
         <div class="col-3 font-weight-bold">
@@ -38,7 +38,7 @@
             {{ form_widget(form.urunAciklamasi, {'attr': {'class': 'form-control'}}) }}
         </div>
         <div class="col-2 mt-2">
-            {{ form_widget(form.fiyat, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.fiyat, {'attr': {'class': 'form-control', 'type': 'number', 'min': '0', 'step': 'any', 'oninput': 'validateNumber(this)'}}) }}
         </div>
         <div class="col-2 mt-2">
             {{ form_widget(form.urunKategori, {'attr': {'class': 'form-control'}}) }}
@@ -47,11 +47,11 @@
             {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'}}) }}
         </div>
     </div>
-    <hr>
     {{ form_end(form) }}
 
+    <hr>
     <div class="row p-2 mt-5 mb-2 m-0">
-        <div class="col-12 text-start my-2 bg-light">
+        <div class="col-12 text-start my-2 ">
             <h2>Ürünler Listesi</h2>
         </div>
         <div class="col-3 text-center font-weight-bold">
@@ -82,8 +82,9 @@
                 {{ form_widget(editForms[urun.id].urunAciklamasi, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'urunAciklamasi'}}) }}
             </div>
             <div class="col-2 text-center">
-                {{ form_widget(editForms[urun.id].fiyat, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'fiyat'}}) }}
+                {{ form_widget(editForms[urun.id].fiyat, {'attr': {'class': 'form-control','type': 'number','min': '0','step': 'any','oninput': 'validateNumber(this)','disabled': 'disabled','data-form-field': 'fiyat'}}) }}
             </div>
+
             <div class="col-2 text-center">
                 {{ form_widget(editForms[urun.id].urunKategori, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'urunKategori'}}) }}
             </div>
@@ -112,27 +113,37 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+    function validateNumber(input) {
+        // Bu fonksiyon, yalnızca sayısal karakterlerin girilmesine izin verir
+        input.value = input.value.replace(/[^0-9.]/g, '');
+    }
     document.querySelectorAll('.edit-btn').forEach(function(button) {
         button.addEventListener('click', function() {
             // Disable all forms
             document.querySelectorAll('.edit-row').forEach(function(row) {
                 row.querySelectorAll('[data-form-field]').forEach(function(input) {
+                    if (input.getAttribute('data-original-value') !== null) {
+                        input.value = input.getAttribute('data-original-value'); // Orijinal değeri geri yükle
+                    }
                     input.disabled = true;
                 });
-                row.querySelector('.edit-btn').style.display = 'inline'; // Show "Düzenle" button
-                row.querySelector('.save-btn').style.display = 'none'; // Hide "Kaydet" button
+                row.querySelector('.edit-btn').style.display = 'inline'; // "Düzenle" butonunu göster
+                row.querySelector('.save-btn').style.display = 'none'; // "Kaydet" butonunu gizle
             });
 
             // Enable current form
             const formRow = this.closest('.row');
             formRow.querySelectorAll('[data-form-field]').forEach(function(input) {
+                const originalValue = input.value; // Mevcut değeri sakla
+                input.setAttribute('data-original-value', originalValue); // Orijinal değeri sakla
                 input.disabled = false;
             });
-            formRow.querySelector('.edit-btn').style.display = 'none'; // Hide "Düzenle" button
-            formRow.querySelector('.save-btn').style.display = 'inline'; // Show "Kaydet" button
+            formRow.querySelector('.edit-btn').style.display = 'none'; // "Düzenle" butonunu gizle
+            formRow.querySelector('.save-btn').style.display = 'inline'; // "Kaydet" butonunu göster
         });
     });
 </script>
+
 
 </body>
 </html>

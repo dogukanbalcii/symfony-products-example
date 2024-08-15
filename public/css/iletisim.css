@@ -1,0 +1,8 @@
+.contact-links a {
+    color: black;
+    text-decoration: none; /* İsteğe bağlı olarak alt çizgiyi kaldırmak için */
+    text-decoration: underline;;
+}
+.contact-links a:hover {
+    color: grey; /* Hover durumunda renk değişikliği için */
+}

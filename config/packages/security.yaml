@@ -40,12 +40,11 @@ security:
                 enable_csrf: true
             logout:
                 path: /logout
-                target: /login
+                target: /
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/editor, roles: ROLE_EDITOR }
+        - { path: ^/index, roles: ROLE_EDITOR }
+        - { path: ^/index, roles: ROLE_USER }
 
 when@test:
     security:

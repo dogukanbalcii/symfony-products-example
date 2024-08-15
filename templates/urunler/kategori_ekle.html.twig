@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<div class="container bg-light text-center p-2 mt-4 custom-container">
+<div class="container bg-light text-center p-2 mt-4 custom-container  bg-white shadow-lg rounded border">
     <div class="row p-2 m-0  justify-content-center">
         <div class="col-12  mb-2">
             <h1>Kategori Ekle</h1>
@@ -71,5 +71,44 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="{{ asset('js/kategori.js') }}"></script>
+<script>
+    let currentEditingId = null; // Mevcut düzenlenen id'yi saklamak için değişken
+
+    function editCategory(id) {
+        // Eğer mevcut düzenlenen id varsa ve bu id diğerinden farklıysa
+        if (currentEditingId && currentEditingId !== id) {
+            // Önceki düzenlemenin değişikliklerini geri yükle
+            document.getElementById('input-' + currentEditingId).value = document.getElementById('input-' + currentEditingId).dataset.originalValue;
+            document.getElementById('input-' + currentEditingId).disabled = true;
+            document.getElementById('save-' + currentEditingId).style.display = 'none';
+            document.getElementById('edit-' + currentEditingId).style.display = 'inline';
+        }
+
+        // Şu anki düzenlemenin orijinal değerini sakla
+        const input = document.getElementById('input-' + id);
+        if (!input.dataset.originalValue) {
+            input.dataset.originalValue = input.value;
+        }
+
+        // Tüm inputları ve düğmeleri kapat
+        document.querySelectorAll('input[id^="input-"]').forEach(input => input.disabled = true);
+        document.querySelectorAll('button[id^="save-"]').forEach(button => button.style.display = 'none');
+        document.querySelectorAll('button[id^="edit-"]').forEach(button => button.style.display = 'inline');
+
+        // Seçili olan inputu aç ve ilgili düğmeleri göster
+        input.disabled = false;
+        document.getElementById('save-' + id).style.display = 'inline';
+        document.getElementById('edit-' + id).style.display = 'none';
+
+        // Mevcut düzenlenen id'yi güncelle
+        currentEditingId = id;
+    }
+
+    function saveCategory(id) {
+        // Formu gönder
+        document.getElementById('form-' + id).submit();
+    }
+</script>
+
 </body>
 </html>

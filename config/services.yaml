@@ -6,6 +6,11 @@
 parameters:
 
 services:
+    App\Service\RoleTranslator:
+        public: true
+
+    App\Twig\RoleExtension:
+        tags: ['twig.extension']
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UrunlerController extends AbstractController
 {
@@ -26,8 +27,12 @@ class UrunlerController extends AbstractController
     }
 
     #[Route('/urunler', name: 'urun_listesi')]
-    public function index(Request $request): Response
+    public function index(Request $request, AuthorizationCheckerInterface $authChecker): Response
     {
+        if (!$authChecker->isGranted('ROLE_EDITOR')) {
+            return $this->redirectToRoute('index');
+        }
+
         // Veritabanından ürünleri çek
         $queryBuilder = $this->urunlerRepository->createQueryBuilder('u')
             ->orderBy('u.id', 'DESC')
@@ -82,9 +87,13 @@ class UrunlerController extends AbstractController
         ]);
     }
 
-    #[Route('/urun/sil/{id}', name: 'urun_sil', methods: ['POST'])]
-    public function sil(Urunler $urun): Response
+    #[Route('/urun/sil/{id}', name: 'urun_sil')]
+    public function sil(Urunler $urun, AuthorizationCheckerInterface $authChecker): Response
     {
+        if (!$authChecker->isGranted('ROLE_EDITOR')) {
+            return $this->redirectToRoute('index');
+        }
+
         // Ürünü veritabanından sil
         $this->entityManager->remove($urun);
         $this->entityManager->flush();
@@ -94,8 +103,12 @@ class UrunlerController extends AbstractController
     }
 
     #[Route('/urun/duzenle/{id}', name: 'urun_duzenle')]
-    public function duzenle(Request $request, Urunler $urun): Response
+    public function duzenle(Request $request, Urunler $urun, AuthorizationCheckerInterface $authChecker): Response
     {
+        if (!$authChecker->isGranted('ROLE_EDITOR')) {
+            return $this->redirectToRoute('index');
+        }
+
         $form = $this->createForm(UrunType::class, $urun);
 
         $form->handleRequest($request);

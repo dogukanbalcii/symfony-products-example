@@ -7,9 +7,6 @@
     <title>Product Page</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <style>
-
-    </style>
 </head>
 <body>
 
@@ -41,56 +38,31 @@
                 </div>
             </nav>
         </div>
-
-        {% if is_granted('ROLE_EDITOR') %}
-        <div class="col-6  p-2 urunKategoriFontSize text-center">
-            <a href="{{ path('urun_listesi') }}" class="urun-link">
-                Ürünler Ekle
-            </a>
-        </div>
-        <div class="col-6  p-2 urunKategoriFontSize text-center">
-            <a href="{{ path('kategori_ekle') }}" class="urun-link">
-                Kategori Ekle
-            </a>
-        </div>
-        {% endif %}
-
-
     </div>
-    <div class="row  p-2 m-0 mt-1">
-        <div class="col-12  p-4">
-            <h3>Ürünler</h3>
+
+    <div class="row p-2 m-0 mt-1 text-center">
+        <div class="col-12 p-4">
+            <h3>Hakkında</h3>
+            <p>Bu proje, ürünler ve ürün kategorileri yönetimini sağlayan bir uygulamadır. Yetkili Kullanıcılar, ürünleri ekleyebilir, düzenleyebilir ve silebilir; ayrıca ürün kategorilerini oluşturabilir ve yönetebilirler.</p>
+            <p>Uygulama, rol tabanlı erişim kontrolü ile kullanıcıların yetkilendirilmiş işlemler gerçekleştirmesine olanak tanır. Yetkiler, `ROLE_USER`, `ROLE_EDITOR`, `ROLE_ADMIN` ve `ROLE_SUPER_ADMIN` rollerine göre düzenlenmiştir.</p>
         </div>
-    </div>
-    <div class="row  p-2 m-0">
-        {% for urun in pagination %}
-            <div class="col-12  p-2 urunlerFontSize">
-                <hr>
-                <div class="row p-2 m-0  ">
-                    <div class="col-3 m-0 ">
-                        {{ urun.isim }}
-                    </div>
-                    <div class="col-3 m-0 ">
-                        {{ urun.fiyat }} TL
-                    </div>
-                    <div class="col-3 m-0 ">
-                        {{ urun.urunAciklamasi }}
-                    </div>
-                    <div class="col-3 m-0 ">
-                        {{ urun.urunKategori.isim }} Kategorisinde
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="col-12  p-2 urunlerFontSize">
-                <hr>
-                Ürün bulunamadı
-            </div>
-        {% endfor %}
-        <div class="col-12   d-flex justify-content-center text-center p-4">
-            {{ knp_pagination_render(pagination) }}
+        <div class="col-12 mt-3">
+            <h5>Proje Özellikleri</h5>
+            <ul class="list-unstyled">
+                <li><strong>Ürün Yönetimi:</strong> Ürün ekleme, düzenleme ve silme işlemleri.</li>
+                <li><strong>Kategori Yönetimi:</strong> Kategori ekleme, düzenleme ve silme işlemleri.</li>
+                <li><strong>Rol Bazlı Erişim Kontrolü:</strong> Kullanıcıların yetkilerine göre farklı işlemler gerçekleştirme.</li>
+            </ul>
+        </div>
+        <div class="col-12 mt-3">
+            <h5>Teknolojiler</h5>
+            <p>Proje, Symfony framework'ü kullanılarak geliştirilmiş olup, Bootstrap ile kullanıcı arayüzü tasarımı yapılmıştır. Veritabanı yönetimi için Doctrine ORM kullanılmıştır.</p>
         </div>
     </div>
+
+
+
+
     <div class="row  p-2 m-0 my-5">
         <hr>
         <div class="col-6 font-weight-bold  mt-2">

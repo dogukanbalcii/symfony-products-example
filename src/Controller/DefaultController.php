@@ -27,4 +27,15 @@ class DefaultController extends AbstractController
             'pagination' => $pagination,
         ]);
     }
+
+    #[Route('/iletisim', name: 'iletisim')]
+    public function iletisim()
+    {
+        return $this->render('default/iletisim.html.twig');
+    }
+    #[Route('/hakkinda', name: 'hakkinda')]
+    public function hakkinda()
+    {
+        return $this->render('default/hakkinda.html.twig');
+    }
 }
