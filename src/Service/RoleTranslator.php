@@ -4,7 +4,7 @@ namespace App\Service;
 
 class RoleTranslator
 {
-    private $roles = [
+    private array $roles = [
         'ROLE_SUPER_ADMIN' => 'Super Admin',
         'ROLE_ADMIN' => 'Admin',
         'ROLE_EDITOR' => 'Editor',

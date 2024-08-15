@@ -29,12 +29,12 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/iletisim', name: 'iletisim')]
-    public function iletisim()
+    public function iletisim(): Response
     {
         return $this->render('default/iletisim.html.twig');
     }
     #[Route('/hakkinda', name: 'hakkinda')]
-    public function hakkinda()
+    public function hakkinda(): Response
     {
         return $this->render('default/hakkinda.html.twig');
     }
