@@ -1,0 +1,3 @@
+security:
+  'Invalid credentials.': 'Geçersiz kullanıcı adı veya şifre.'
+  'Invalid CSRF token.': 'Geçersiz güvenlik kodu.'

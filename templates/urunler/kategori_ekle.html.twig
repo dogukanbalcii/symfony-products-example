@@ -25,8 +25,10 @@
         <div class="col-12 col-md-7 col-lg-12 ">
             <form action="{{ path('kategori_ekle') }}" method="post" class="d-flex flex-wrap align-items-center">
                 <div class="flex-grow-1 mr-2">
-                    <label for="isim"></label><input type="text" id="isim" name="isim" class="form-control" required>
+                    <label for="isim"></label>
+                    <input type="text" id="isim" name="isim" class="form-control" required onkeypress="return /^[A-Za-zĞÜŞİÖÇğüşıöç\s]*$/.test(event.key)">
                 </div>
+
                 <div class="mt-4">
                     <button type="submit" class="btn btn-success">
                         <img src="{{ asset('icons/create.png') }}" style="height: 30px; width: 30px;" alt="create">
@@ -42,7 +44,7 @@
                 <hr>
                 <div class="d-flex align-items-center">
                     <form id="form-{{ kategori.id }}" action="{{ path('kategori_duzenle', { 'id': kategori.id }) }}" method="post" class="d-flex align-items-center flex-grow-1 me-2">
-                        <label for="input-{{ kategori.id }}"></label><input type="text" class="form-control me-2 mr-2" id="input-{{ kategori.id }}" name="isim" value="{{ kategori.isim }}" disabled>
+                        <label for="input-{{ kategori.id }}"></label><input type="text" required onkeypress="return /^[A-Za-zĞÜŞİÖÇğüşıöç\s]*$/.test(event.key)" class="form-control me-2 mr-2" id="input-{{ kategori.id }}" name="isim" value="{{ kategori.isim }}" disabled>
                         <button type="button" class="bg-info border-0 mr-1" id="edit-{{ kategori.id }}" onclick="editCategory({{ kategori.id }})">
                             <img src="{{ asset('icons/update.png') }}" style="height: 40px; width: 40px;" alt="update">
                         </button>
