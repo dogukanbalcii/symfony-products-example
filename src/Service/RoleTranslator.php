@@ -2,17 +2,19 @@
 
 namespace App\Service;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 class RoleTranslator
 {
-    private array $roles = [
-        'ROLE_SUPER_ADMIN' => 'Super Admin',
-        'ROLE_ADMIN' => 'Admin',
-        'ROLE_EDITOR' => 'Editor',
-        'ROLE_USER' => 'User',
-    ];
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     public function translate(string $role): string
     {
-        return $this->roles[$role] ?? $role;
+        return $this->translator->trans('roles.' . $role);
     }
 }

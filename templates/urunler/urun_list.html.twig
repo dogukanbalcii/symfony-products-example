@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="{{ app.request.locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ürünler Listesi</title>
+    <title>{{ 'urun_list.title'|trans }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/urunList.css') }}" rel="stylesheet">
 </head>
@@ -13,19 +13,19 @@
     {{ form_start(form) }}
     <div class="row m-0 p-2 text-center">
         <div class="col-12 ">
-            <h2>Yeni Ürün Ekle</h2>
+            <h2>{{ 'urun_list.new_product'|trans }}</h2>
         </div>
         <div class="col-3 font-weight-bold">
-            İsim
+            {{ 'urun_list.name'|trans }}
         </div>
         <div class="col-3 font-weight-bold">
-            Açıklaması
+            {{ 'urun_list.description'|trans }}
         </div>
         <div class="col-2 font-weight-bold">
-            Fiyat
+            {{ 'urun_list.price'|trans }}
         </div>
         <div class="col-2 font-weight-bold">
-            Kategori
+            {{ 'urun_list.category'|trans }}
         </div>
         <div class="col-2 font-weight-bold">
 
@@ -52,19 +52,19 @@
     <hr>
     <div class="row p-2 mt-5 mb-2 m-0">
         <div class="col-12 text-start my-2 ">
-            <h2>Ürünler Listesi</h2>
+            <h2>{{ 'urun_list.product_list'|trans }}</h2>
         </div>
         <div class="col-3 text-center font-weight-bold">
-            İsim
+            {{ 'urun_list.name'|trans }}
         </div>
         <div class="col-3 text-center font-weight-bold">
-            Açıklaması
+            {{ 'urun_list.description'|trans }}
         </div>
         <div class="col-2 text-center font-weight-bold">
-            Fiyat
+            {{ 'urun_list.price'|trans }}
         </div>
         <div class="col-2 text-center font-weight-bold">
-            Kategori
+            {{ 'urun_list.category'|trans }}
         </div>
         <div class="col-2 text-center font-weight-bold">
 
@@ -89,13 +89,13 @@
                 {{ form_widget(editForms[urun.id].urunKategori, {'attr': {'class': 'form-control', 'disabled': 'disabled', 'data-form-field': 'urunKategori'}}) }}
             </div>
             <div class="col-1 text-center">
-                <button type="button" class="btn btn-primary btn-sm edit-btn">Düzenle</button>
+                <button type="button" class="btn btn-primary btn-sm edit-btn">{{ 'urun_list.edit'|trans }}</button>
                 {{ form_widget(editForms[urun.id].save, {'attr': {'class': 'btn btn-success btn-sm save-btn', 'style': 'display: none;'}}) }}
                 {{ form_end(editForms[urun.id]) }}
             </div>
             <div class="col-1 text-center">
                 {{ form_start(deleteForms[urun.id]) }}
-                <button class="btn btn-danger">Sil</button>
+                <button class="btn btn-danger">{{ 'urun_list.delete'|trans }}</button>
                 {{ form_end(deleteForms[urun.id]) }}
             </div>
         </div>
@@ -143,7 +143,6 @@
         });
     });
 </script>
-
 
 </body>
 </html>

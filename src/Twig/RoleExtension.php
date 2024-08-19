@@ -18,8 +18,12 @@ class RoleExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('translate_role', [$this->roleTranslator, 'translate']),
+            new TwigFilter('translate_role', [$this, 'translateRole']),
         ];
     }
-}
 
+    public function translateRole(string $role): string
+    {
+        return $this->roleTranslator->translate($role);
+    }
+}

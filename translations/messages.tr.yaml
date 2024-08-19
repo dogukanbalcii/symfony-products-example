@@ -1,3 +1,80 @@
 security:
   'Invalid credentials.': 'Geçersiz kullanıcı adı veya şifre.'
   'Invalid CSRF token.': 'Geçersiz güvenlik kodu.'
+
+roles:
+  ROLE_SUPER_ADMIN: 'Süper Yönetici'
+  ROLE_ADMIN: 'Yönetici'
+  ROLE_EDITOR: 'Editör'
+  ROLE_USER: 'Kullanıcı'
+guest: 'Misafir'
+
+navbar_contact: "İletişim"
+navbar_about: "Hakkında"
+navbar_login: "Giriş Yap"
+navbar_logout: "Çıkış Yap"
+hakkinda_heading: "Hakkında"
+hakkinda_intro: "Bu proje, ürünler ve ürün kategorileri yönetimini sağlayan bir uygulamadır. Yetkili Kullanıcılar, ürünleri ekleyebilir, düzenleyebilir ve silebilir; ayrıca ürün kategorilerini oluşturabilir ve yönetebilirler."
+hakkinda_roles: "Uygulama, rol tabanlı erişim kontrolü ile kullanıcıların yetkilendirilmiş işlemler gerçekleştirmesine olanak tanır. Yetkiler, `ROLE_USER`, `ROLE_EDITOR`, `ROLE_ADMIN` ve `ROLE_SUPER_ADMIN` rollerine göre düzenlenmiştir."
+features_heading: "Proje Özellikleri"
+feature_product_management: "Ürün Yönetimi:"
+feature_product_management_statement: "Ürün ekleme, düzenleme ve silme işlemleri."
+feature_category_management: "Kategori Yönetimi:"
+feature_category_management_statement: "kategori ekleme, düzenleme ve silme işlemleri."
+feature_role_based_access: "Rol Bazlı Erişim Kontrolü:"
+feature_role_based_access_statement: "Kullanıcıların yetkilerine göre farklı işlemler gerçekleştirme."
+technologies_heading: "Teknolojiler"
+technologies_intro: "Proje, Symfony framework'ü kullanılarak geliştirilmiş olup, Bootstrap ile kullanıcı arayüzü tasarımı yapılmıştır. Veritabanı yönetimi için Doctrine ORM kullanılmıştır."
+footer_name: "Doğukan Balcı"
+footer_social: "Sosyal"
+
+#iletisim.html.twig kısmı
+product_page_title: 'Ürün Sayfası'
+contact_page_title: 'İletişim'
+navbar_toggle_label: 'Navigasyon menüsünü aç/kapat'
+contact_heading: 'İletişim'
+contact_intro: 'Sosyal medyada hesaplarımdan ve aşağıdaki tüm mail adreslerinden iletişime geçebilirsiniz:'
+contact_social_media: 'Sosyal Medya'
+linkedin: 'Linkedin'
+github: 'Github'
+contact_email: 'E-mail'
+contact_note: 'Not'
+contact_preference: 'Tercihen ilk mail daha önceliklidir.'
+github_profile: 'GitHub Profiline Git'
+linkedin_profile: 'LinkedIn Profiline Git'
+
+
+currency: 'TL'
+category_label: 'Kategori'
+product_list_heading: 'Ürünler'
+product_management_add: 'Ürün Ekle'
+category_management_add: 'Kategori Ekle'
+no_products_found: 'Ürün bulunamadı'
+
+login_page_title: 'Giriş Yap'
+login_heading: 'Giriş Yap'
+username_label: 'Kullanıcı Adı'
+password_label: 'Şifre'
+login_button: 'Giriş Yap'
+
+categories_title: 'Kategoriler'
+add_category_heading: 'Kategori Ekle'
+create_icon_alt: 'Oluştur'
+update_icon_alt: 'Güncelle'
+accept_icon_alt: 'Kabul Et'
+delete_icon_alt: 'Sil'
+no_categories_message: 'Henüz kategori eklenmedi.'
+
+urun_list:
+  title: "Ürünler Listesi"
+  new_product: "Yeni Ürün Ekle"
+  name: "İsim"
+  description: "Açıklaması"
+  price: "Fiyat"
+  category: "Kategori"
+  product_list: "Ürünler Listesi"
+  edit: "Düzenle"
+  delete: "Sil"
+
+
+

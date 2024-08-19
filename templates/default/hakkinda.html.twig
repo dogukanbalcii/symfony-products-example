@@ -1,10 +1,10 @@
 {# templates/default/index.html.twig #}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page</title>
+    <title>{{ 'navbar_about'|trans }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{{ path('index') }}">
                         <b class="text-success"><</b>
-                        <b>{{ app.user ? app.user.roles[0]|translate_role : 'Misafir' }}</b>
+                        <b>{{ app.user ? app.user.roles[0]|translate_role : 'guest'|trans }}</b>
                         <b class="text-success">\></b>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,12 +26,12 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ml-auto">
-                            <a class="nav-link active" href="{{ path('iletisim') }}">İletişim</a>
-                            <a class="nav-link active" href="{{ path('hakkinda') }}">Hakkında</a>
+                            <a class="nav-link active" href="{{ path('iletisim') }}">{{ 'navbar_contact'|trans }}</a>
+                            <a class="nav-link active" href="{{ path('hakkinda') }}">{{ 'navbar_about'|trans }}</a>
                             {% if app.user %}
-                                <a class="nav-link active" href="{{ path('logout') }}">Çıkış Yap</a>
+                                <a class="nav-link active" href="{{ path('logout') }}">{{ 'navbar_logout'|trans }}</a>
                             {% else %}
-                                <a class="nav-link active" href="{{ path('login') }}">Giriş Yap</a>
+                                <a class="nav-link active" href="{{ path('login') }}">{{ 'navbar_login'|trans }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -42,34 +42,31 @@
 
     <div class="row p-2 m-0 mt-1 text-center">
         <div class="col-12 p-4">
-            <h3>Hakkında</h3>
-            <p>Bu proje, ürünler ve ürün kategorileri yönetimini sağlayan bir uygulamadır. Yetkili Kullanıcılar, ürünleri ekleyebilir, düzenleyebilir ve silebilir; ayrıca ürün kategorilerini oluşturabilir ve yönetebilirler.</p>
-            <p>Uygulama, rol tabanlı erişim kontrolü ile kullanıcıların yetkilendirilmiş işlemler gerçekleştirmesine olanak tanır. Yetkiler, `ROLE_USER`, `ROLE_EDITOR`, `ROLE_ADMIN` ve `ROLE_SUPER_ADMIN` rollerine göre düzenlenmiştir.</p>
+            <h3>{{ 'hakkinda_heading'|trans }}</h3>
+            <p>{{ 'hakkinda_intro'|trans }}</p>
+            <p>{{ 'hakkinda_roles'|trans }}</p>
         </div>
         <div class="col-12 mt-3">
-            <h5>Proje Özellikleri</h5>
+            <h5>{{ 'features_heading'|trans }}</h5>
             <ul class="list-unstyled">
-                <li><strong>Ürün Yönetimi:</strong> Ürün ekleme, düzenleme ve silme işlemleri.</li>
-                <li><strong>Kategori Yönetimi:</strong> Kategori ekleme, düzenleme ve silme işlemleri.</li>
-                <li><strong>Rol Bazlı Erişim Kontrolü:</strong> Kullanıcıların yetkilerine göre farklı işlemler gerçekleştirme.</li>
+                <li><strong>{{ 'feature_product_management'|trans }}</strong>{{ 'feature_product_management_statement' }}</li>
+                <li><strong>{{ 'feature_category_management'|trans }}</strong>{{ 'feature_category_management_statement' }}</li>
+                <li><strong>{{ 'feature_role_based_access'|trans }}</strong>{{ 'feature_product_management_statement' }}</li>
             </ul>
         </div>
         <div class="col-12 mt-3">
-            <h5>Teknolojiler</h5>
-            <p>Proje, Symfony framework'ü kullanılarak geliştirilmiş olup, Bootstrap ile kullanıcı arayüzü tasarımı yapılmıştır. Veritabanı yönetimi için Doctrine ORM kullanılmıştır.</p>
+            <h5>{{ 'technologies_heading'|trans }}</h5>
+            <p>{{ 'technologies_intro'|trans }}</p>
         </div>
     </div>
-
-
-
 
     <div class="row  p-2 m-0 my-5">
         <hr>
         <div class="col-6 font-weight-bold  mt-2">
-            <h3>Doğukan Balcı</h3>
+            <h3>{{ 'footer_name'|trans }}</h3>
         </div>
         <div class="d-flex text-center flex-column col-6 font-weight-bold  mt-2">
-            <h3>Sosyal</h3>
+            <h3>{{ 'footer_social'|trans }}</h3>
         </div>
         <div class="col-6 font-weight-bold  mt-2">
         </div>
@@ -78,19 +75,14 @@
                 GitHub
             </a>
         </div>
-
         <div class="col-6 font-weight-bold  mt-2">
             <!-- Diğer içerik -->
         </div>
-
         <div class="d-flex text-center flex-column col-6  mt-2">
             <a href="https://www.linkedin.com/in/dogukan-balci/" target="_blank" data-toggle="tooltip" data-placement="top" title="LinkedIn Profiline Git">
                 Linkedin
             </a>
         </div>
-
-
-
     </div>
 </div>
 

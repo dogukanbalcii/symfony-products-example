@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="{{ app.request.locale }}">
 
 <head>
     <meta charset="UTF-8">
-    <title>Kategoriler</title>
+    <title>{{ 'categories_title'|trans }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/urunList.css') }}" rel="stylesheet">
 </head>
 
 <body>
-<div class="container bg-light text-center p-2 mt-4 custom-container  bg-white shadow-lg rounded border">
-    <div class="row p-2 m-0  justify-content-center">
-        <div class="col-12  mb-2">
-            <h1>Kategori Ekle</h1>
+<div class="container bg-light text-center p-2 mt-4 custom-container bg-white shadow-lg rounded border">
+    <div class="row p-2 m-0 justify-content-center">
+        <div class="col-12 mb-2">
+            <h1>{{ 'add_category_heading'|trans }}</h1>
         </div>
         <!-- Hata mesajlarını burada gösteriyoruz -->
         {% for message in app.flashes('error') %}
@@ -22,7 +22,7 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="col-12 col-md-7 col-lg-12 ">
+        <div class="col-12 col-md-7 col-lg-12">
             <form action="{{ path('kategori_ekle') }}" method="post" class="d-flex flex-wrap align-items-center">
                 <div class="flex-grow-1 mr-2">
                     <label for="isim"></label>
@@ -31,36 +31,37 @@
 
                 <div class="mt-4">
                     <button type="submit" class="btn btn-success">
-                        <img src="{{ asset('icons/create.png') }}" style="height: 30px; width: 30px;" alt="create">
+                        <img src="{{ asset('icons/create.png') }}" style="height: 30px; width: 30px;" alt="{{ 'create_icon_alt'|trans }}">
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="row p-2 m-0  justify-content-center">
+    <div class="row p-2 m-0 justify-content-center">
         {% for kategori in kategoriler %}
-            <div class="col-7 col-md-7 col-lg-12  mb-2">
+            <div class="col-7 col-md-7 col-lg-12 mb-2">
                 <hr>
                 <div class="d-flex align-items-center">
                     <form id="form-{{ kategori.id }}" action="{{ path('kategori_duzenle', { 'id': kategori.id }) }}" method="post" class="d-flex align-items-center flex-grow-1 me-2">
-                        <label for="input-{{ kategori.id }}"></label><input type="text" required onkeypress="return /^[A-Za-zĞÜŞİÖÇğüşıöç\s]*$/.test(event.key)" class="form-control me-2 mr-2" id="input-{{ kategori.id }}" name="isim" value="{{ kategori.isim }}" disabled>
+                        <label for="input-{{ kategori.id }}"></label>
+                        <input type="text" required onkeypress="return /^[A-Za-zĞÜŞİÖÇğüşıöç\s]*$/.test(event.key)" class="form-control me-2 mr-2" id="input-{{ kategori.id }}" name="isim" value="{{ kategori.isim }}" disabled>
                         <button type="button" class="bg-info border-0 mr-1" id="edit-{{ kategori.id }}" onclick="editCategory({{ kategori.id }})">
-                            <img src="{{ asset('icons/update.png') }}" style="height: 40px; width: 40px;" alt="update">
+                            <img src="{{ asset('icons/update.png') }}" style="height: 40px; width: 40px;" alt="{{ 'update_icon_alt'|trans }}">
                         </button>
                         <button type="button" id="save-{{ kategori.id }}" onclick="saveCategory({{ kategori.id }})" class="bg-success border-0 mr-1" style="display:none;">
-                            <img src="{{ asset('icons/accept.png') }}" style="height: 40px; width: 40px;" alt="accept"></button>
+                            <img src="{{ asset('icons/accept.png') }}" style="height: 40px; width: 40px;" alt="{{ 'accept_icon_alt'|trans }}"></button>
                         <input type="hidden" name="_method" value="PUT">
                     </form>
                     <form action="{{ path('kategori_sil', { 'id': kategori.id }) }}" method="post" class="d-flex align-items-center">
                         <button type="submit" class="btn btn-danger">
-                            <img src="{{ asset('icons/delete.png') }}" style="height: 30px; width: 30px;" alt="delete">
+                            <img src="{{ asset('icons/delete.png') }}" style="height: 30px; width: 30px;" alt="{{ 'delete_icon_alt'|trans }}">
                         </button>
                     </form>
                 </div>
             </div>
         {% else %}
-            <div class="col-12 ">Henüz kategori eklenmedi.</div>
+            <div class="col-12">{{ 'no_categories_message'|trans }}</div>
         {% endfor %}
         <div class="col-md-7 col-lg-12 col-7 mt-4 d-flex justify-content-center">
             {{ knp_pagination_render(kategoriler) }}

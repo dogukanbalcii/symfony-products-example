@@ -1,40 +1,37 @@
-{# templates/default/index.html.twig #}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page</title>
+    <title>{{ 'product_page_title'|trans }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <style>
-
-    </style>
+    <link href="{{ asset('css/iletisim.css') }}" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-    <div class="row  p-2 m-0">
-        <div class="col-12  p-2">
+    <div class="row p-2 m-0">
+        <div class="col-12 p-2">
             <!-- NAVBAR -->
             <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{{ path('index') }}">
                         <b class="text-success"><</b>
-                        <b>{{ app.user ? app.user.roles[0]|translate_role : 'Misafir' }}</b>
+                        <b>{{ app.user ? app.user.roles[0]|translate_role : 'guest'|trans }}</b>
                         <b class="text-success">\></b>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="{{ 'navbar_toggle_label'|trans }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ml-auto">
-                            <a class="nav-link active" href="{{ path('iletisim') }}">İletişim</a>
-                            <a class="nav-link active" href="{{ path('hakkinda') }}">Hakkında</a>
+                            <a class="nav-link active" href="{{ path('iletisim') }}">{{ 'navbar_contact'|trans }}</a>
+                            <a class="nav-link active" href="{{ path('hakkinda') }}">{{ 'navbar_about'|trans }}</a>
                             {% if app.user %}
-                                <a class="nav-link active" href="{{ path('logout') }}">Çıkış Yap</a>
+                                <a class="nav-link active" href="{{ path('logout') }}">{{ 'navbar_logout'|trans }}</a>
                             {% else %}
-                                <a class="nav-link active" href="{{ path('login') }}">Giriş Yap</a>
+                                <a class="nav-link active" href="{{ path('login') }}">{{ 'navbar_login'|trans }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -43,81 +40,78 @@
         </div>
 
         {% if is_granted('ROLE_EDITOR') %}
-        <div class="col-6  p-2 urunKategoriFontSize text-center">
-            <a href="{{ path('urun_listesi') }}" class="urun-link">
-                Ürünler Ekle
-            </a>
-        </div>
-        <div class="col-6  p-2 urunKategoriFontSize text-center">
-            <a href="{{ path('kategori_ekle') }}" class="urun-link">
-                Kategori Ekle
-            </a>
-        </div>
+            <div class="col-6 p-2 urunKategoriFontSize text-center">
+                <a href="{{ path('urun_listesi') }}" class="urun-link">
+                    {{ 'product_management_add'|trans }}
+                </a>
+            </div>
+            <div class="col-6 p-2 urunKategoriFontSize text-center">
+                <a href="{{ path('kategori_ekle') }}" class="urun-link">
+                    {{ 'category_management_add'|trans }}
+                </a>
+            </div>
         {% endif %}
 
-
     </div>
-    <div class="row  p-2 m-0 mt-1">
-        <div class="col-12  p-4">
-            <h3>Ürünler</h3>
+    <div class="row p-2 m-0 mt-1">
+        <div class="col-12 p-4">
+            <h3>{{ 'product_list_heading'|trans }}</h3>
         </div>
     </div>
-    <div class="row  p-2 m-0">
+    <div class="row p-2 m-0">
         {% for urun in pagination %}
-            <div class="col-12  p-2 urunlerFontSize">
+            <div class="col-12 p-2 urunlerFontSize">
                 <hr>
-                <div class="row p-2 m-0  ">
-                    <div class="col-3 m-0 ">
+                <div class="row p-2 m-0">
+                    <div class="col-3 m-0">
                         {{ urun.isim }}
                     </div>
-                    <div class="col-3 m-0 ">
-                        {{ urun.fiyat }} TL
+                    <div class="col-3 m-0">
+                        {{ urun.fiyat }} {{ 'currency'|trans }}
                     </div>
-                    <div class="col-3 m-0 ">
+                    <div class="col-3 m-0">
                         {{ urun.urunAciklamasi }}
                     </div>
-                    <div class="col-3 m-0 ">
-                        {{ urun.urunKategori.isim }} Kategorisinde
+                    <div class="col-3 m-0">
+                        {{ urun.urunKategori.isim }} {{ 'category_label'|trans }}
                     </div>
                 </div>
             </div>
         {% else %}
-            <div class="col-12  p-2 urunlerFontSize">
+            <div class="col-12 p-2 urunlerFontSize">
                 <hr>
-                Ürün bulunamadı
+                {{ 'no_products_found'|trans }}
             </div>
         {% endfor %}
-        <div class="col-12   d-flex justify-content-center text-center p-4">
+        <div class="col-12 d-flex justify-content-center text-center p-4">
             {{ knp_pagination_render(pagination) }}
         </div>
     </div>
-    <div class="row  p-2 m-0 my-5">
+    <div class="row p-2 m-0 my-5">
         <hr>
-        <div class="col-6 font-weight-bold  mt-2">
-            <h3>Doğukan Balcı</h3>
+        <div class="col-6 font-weight-bold mt-2">
+            <h3>{{ 'footer_name'|trans }}</h3>
         </div>
-        <div class="d-flex text-center flex-column col-6 font-weight-bold  mt-2">
-            <h3>Sosyal</h3>
+        <div class="d-flex text-center flex-column col-6 font-weight-bold mt-2">
+            <h3>{{ 'footer_social'|trans }}</h3>
         </div>
-        <div class="col-6 font-weight-bold  mt-2">
+        <div class="col-6 font-weight-bold mt-2">
         </div>
-        <div class="d-flex text-center flex-column col-6  mt-2">
-            <a href="https://github.com/dogukanbalcii" target="_blank" data-toggle="tooltip" data-placement="top" title="GitHub Profiline Git">
-                GitHub
+        <div class="d-flex text-center flex-column col-6 mt-2">
+            <a href="https://github.com/dogukanbalcii" target="_blank" data-toggle="tooltip" data-placement="top" title="{{ 'github_profile'|trans }}">
+                {{ 'github'|trans }}
             </a>
         </div>
 
-        <div class="col-6 font-weight-bold  mt-2">
+        <div class="col-6 font-weight-bold mt-2">
             <!-- Diğer içerik -->
         </div>
 
-        <div class="d-flex text-center flex-column col-6  mt-2">
-            <a href="https://www.linkedin.com/in/dogukan-balci/" target="_blank" data-toggle="tooltip" data-placement="top" title="LinkedIn Profiline Git">
-                Linkedin
+        <div class="d-flex text-center flex-column col-6 mt-2">
+            <a href="https://www.linkedin.com/in/dogukan-balci/" target="_blank" data-toggle="tooltip" data-placement="top" title="{{ 'linkedin_profile'|trans }}">
+                {{ 'linkedin'|trans }}
             </a>
         </div>
-
-
 
     </div>
 </div>
