@@ -1,0 +1,81 @@
+roles:
+  ROLE_SUPER_ADMIN: 'Super Admin'
+  ROLE_ADMIN: 'Admin'
+  ROLE_EDITOR: 'Editor'
+  ROLE_USER: 'User'
+guest: 'Guest'
+
+
+
+navbar_contact: "Contact"
+navbar_about: "About"
+navbar_login: "Login"
+navbar_logout: "Logout"
+hakkinda_heading: "About"
+hakkinda_intro: "This project is an application for managing products and product categories. Authorized users can add, edit, and delete products; they can also create and manage product categories."
+hakkinda_roles: "The application allows users to perform authorized actions based on role-based access control. The permissions are structured according to roles: `ROLE_USER`, `ROLE_EDITOR`, `ROLE_ADMIN`, and `ROLE_SUPER_ADMIN`."
+features_heading: "Project Features"
+feature_product_management: "Product Management:"
+feature_product_management_statement: "Adding, editing, and deleting products."
+feature_category_management: "Category Management:"
+feature_category_management_statement: "Adding, editing, and deleting categories."
+feature_role_based_access: "Role-Based Access Control:"
+feature_role_based_access_statement: "Performing different actions based on user permissions."
+technologies_heading: "Technologies"
+technologies_intro: "The project was developed using the Symfony framework, with the user interface designed using Bootstrap. Doctrine ORM is used for database management."
+footer_name: "Doğukan Balcı"
+footer_social: "Social"
+
+product_page_title: 'Product Page'
+contact_page_title: 'Contact'
+navbar_toggle_label: 'Toggle navigation'
+contact_heading: 'Contact'
+contact_intro: 'You can reach out through my social media accounts and the email addresses listed below:'
+contact_social_media: 'Social Media'
+linkedin: 'LinkedIn'
+github: 'GitHub'
+contact_email: 'E-mail'
+contact_note: 'Note'
+contact_preference: 'Preferably, the first email is prioritized.'
+github_profile: 'Go to GitHub Profile'
+linkedin_profile: 'Go to LinkedIn Profile'
+
+
+currency: 'TL'
+category_label: 'Category'
+product_list_heading: 'Products'
+product_management_add: 'Add Product'
+category_management_add: 'Add Category'
+no_products_found: 'No products found'
+
+login_page_title: 'Login'
+login_heading: 'Login'
+username_label: 'Username'
+password_label: 'Password'
+login_button: 'Login'
+
+categories_title: 'Categories'
+add_category_heading: 'Add Category'
+create_icon_alt: 'Create'
+update_icon_alt: 'Update'
+accept_icon_alt: 'Accept'
+delete_icon_alt: 'Delete'
+no_categories_message: 'No categories added yet.'
+
+urun_list:
+  title: "Product List"
+  new_product: "Add New Product"
+  name: "Name"
+  description: "Description"
+  price: "Price"
+  category: "Category"
+  product_list: "Product List"
+  edit: "Edit"
+  delete: "Delete"
+
+form.isim: "Name"
+form.urun_aciklamasi: "Description"
+form.fiyat: "Price"
+form.kategori: "Category"
+form.kaydet: "Save"
+

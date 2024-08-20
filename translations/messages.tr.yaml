@@ -76,5 +76,10 @@ urun_list:
   edit: "Düzenle"
   delete: "Sil"
 
+form.isim: "İsim"
+form.urun_aciklamasi: "Açıklama"
+form.fiyat: "Fiyat"
+form.kategori: "Kategori"
+form.kaydet: "Kaydet"
 
 

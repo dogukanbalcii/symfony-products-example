@@ -10,29 +10,36 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\UrunKategori;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Urunler;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UrunType extends AbstractType
 {
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('isim', TextType::class, [
-                'label' => 'İsim',
+                'label' => $this->translator->trans('form.isim'),
             ])
             ->add('urunAciklamasi', TextType::class, [
-                'label' => 'Açıklama',
+                'label' => $this->translator->trans('form.urun_aciklamasi'),
             ])
             ->add('fiyat', TextType::class, [
-                'label' => 'Fiyat',
+                'label' => $this->translator->trans('form.fiyat'),
             ])
             ->add('urunKategori', EntityType::class, [
                 'class' => UrunKategori::class,
                 'choice_label' => 'isim',
-                'label' => 'Kategori',
+                'label' => $this->translator->trans('form.kategori'),
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Kaydet',
+                'label' => $this->translator->trans('form.kaydet'),
             ]);
     }
 
@@ -43,3 +50,4 @@ class UrunType extends AbstractType
         ]);
     }
 }
+

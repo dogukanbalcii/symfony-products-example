@@ -12,7 +12,12 @@
 <div class="container my-3 p-2 bg-white shadow-lg rounded border">
     {{ form_start(form) }}
     <div class="row m-0 p-2 text-center">
-        <div class="col-12 ">
+        <div class="col-1 mb-4 align-content-center">
+            <a href="{{ path('index') }}" class="d-block">
+                <img src="{{ asset('icons/home.png') }}">
+            </a>
+        </div>
+        <div class="col-10 mb-4">
             <h2>{{ 'urun_list.new_product'|trans }}</h2>
         </div>
         <div class="col-3 font-weight-bold">
