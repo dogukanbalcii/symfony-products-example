@@ -14,7 +14,6 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
-
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
@@ -26,6 +25,6 @@ class SecurityController extends AbstractController
     #[Route('/logout', name: 'logout', methods: ['POST'])]
     public function logout(): void
     {
-        throw new LogicException();
+        throw new LogicException('This should never be reached!');
     }
 }

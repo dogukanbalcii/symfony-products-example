@@ -8,21 +8,11 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
     providers:
-        users_in_memory:
-            memory:
-                users:
-                    user:
-                        password: '$2y$12$lOXa59njFTdS5kE4aHfgCOg4vMbKP9uRH.DwZMFxzdTimZ/7h2UyK'   # user
-                        roles: 'ROLE_USER'
-                    editor:
-                        password: '$2y$12$/tob0f80d.oRcHJFg4VFG.0QPE8igzjXFVhhe0NSciJSwvIkyzQB.'   # editor
-                        roles: 'ROLE_EDITOR'
-                    admin:
-                        password: '$2y$12$1srZkLLJcbWfYOPN4uaF8eeH61WB05fr7YDHcA/hxVFIX7pvYXY1a'   # admin
-                        roles: 'ROLE_ADMIN'
-                    superadmin:
-                        password: '$2y$12$/tTJsCOtLkxX8g6UvJFkROpoW8FkLj69TBw1RcotlF6tddLApyIfu'   # superadmin
-                        roles: 'ROLE_SUPER_ADMIN'
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
 
     firewalls:
         dev:
@@ -31,7 +21,7 @@ security:
 
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
             form_login:
                 login_path: login
                 check_path: login
